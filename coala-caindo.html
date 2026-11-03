@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Austrália — Versão com coalas caindo. Mesmo conteúdo, todas as imagens trocadas sem repetição." />
+  <title>Austrália — Coalas em Queda Livre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    /* =============================================
+       RESET & ROOT
+    ============================================= */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --c1: #020c1b;
+      --c2: #071526;
+      --c3: #0d2137;
+      --c4: #0a3850;
+      --c5: #065a5a;
+      --c6: #0e8080;
+      --c7: #00a090;
+      --c8: #00b4a0;
+      --c9: #00c8b0;
+      --c10: #7fffd4;
+      --aqua: #00c4a8;
+      --aqua-light: #7fffd4;
+      --aqua-bright: #00d4b8;
+      --white: #e8f8f5;
+      --muted: rgba(232,248,245,.65);
+      --gold: #ffb347;
+      --glass: rgba(255,255,255,.04);
+      --gborder: rgba(255,255,255,.1);
+      --shadow: 0 20px 60px rgba(0,0,0,.4);
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--white);
+      background: linear-gradient(180deg,
+        #020c1b 0%, #071526 8%, #0d2137 18%,
+        #0a3850 30%, #065a5a 43%, #0e8080 56%,
+        #00a090 67%, #00b4a0 76%, #00c8b0 86%, #7fffd4 100%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track { background: var(--c1); }
+    ::-webkit-scrollbar-thumb { background: var(--aqua); border-radius:3px; }
+
+    /* =============================================
+       KOALA FALLING ANIMATION
+    ============================================= */
+    #koala-rain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    .falling-koala {
+      position: absolute;
+      top: -160px;
+      width: 95px;
+      height: auto;
+      filter: drop-shadow(0 12px 25px rgba(0,0,0,.45));
+      will-change: transform, opacity;
+      animation-name: koala-fall;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+    }
+    @keyframes koala-fall {
+      0% {
+        transform: translateY(-160px) rotate(-12deg);
+        opacity: 0;
+      }
+      8% {
+        opacity: 1;
+      }
+      25% {
+        transform: translateY(25vh) rotate(14deg);
+      }
+      50% {
+        transform: translateY(52vh) rotate(-16deg);
+      }
+      75% {
+        transform: translateY(78vh) rotate(18deg);
+      }
+      92% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(115vh) rotate(-22deg);
+        opacity: 0;
+      }
+    }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      background: rgba(2,12,27,.65);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      transition: background .3s;
+    }
+    .nav-inner {
+      max-width:1400px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 0 2rem; height:68px;
+    }
+    .nav-logo {
+      font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700;
+      text-decoration:none; display:flex; align-items:center; gap:.5rem;
+      background: linear-gradient(135deg,var(--aqua),var(--aqua-light));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .nav-flag { font-size:1.4rem; -webkit-text-fill-color:initial; }
+    .nav-links { list-style:none; display:flex; gap:.1rem; }
+    .nav-links a {
+      color: var(--muted); text-decoration:none; font-size:.72rem;
+      font-weight:600; text-transform:uppercase; letter-spacing:.9px;
+      padding:.45rem .65rem; border-radius:6px; transition:all .25s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--aqua-light); background: rgba(0,196,168,.12);
+    }
+    .hamburger {
+      display:none; flex-direction:column; gap:5px;
+      cursor:pointer; padding:6px; background:none; border:none;
+    }
+    .hamburger span {
+      display:block; width:24px; height:2px; background:var(--white);
+      border-radius:2px; transition:all .3s;
+    }
+    .mobile-menu {
+      display:none; position:fixed; top:68px; left:0; right:0;
+      background: rgba(7,21,38,.97); backdrop-filter:blur(24px);
+      padding:1rem 1.5rem; z-index:998;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .mobile-menu.open { display:block; }
+    .mobile-menu ul { list-style:none; display:flex; flex-direction:column; gap:.25rem; }
+    .mobile-menu a {
+      color:var(--muted); text-decoration:none; font-size:.88rem;
+      font-weight:600; text-transform:uppercase; letter-spacing:.8px;
+      padding:.75rem 1rem; border-radius:10px; display:block; transition:all .25s;
+    }
+    .mobile-menu a:hover { color:var(--aqua-light); background:rgba(0,196,168,.1); }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    #hero {
+      position:relative; height:100vh; min-height:680px;
+      display:flex; align-items:center; justify-content:center; overflow:hidden;
+    }
+    .hero-bg {
+      position:absolute; inset:0;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Koala_clinging_onto_a_Eucalyptus_tree.jpg/1920px-Koala_clinging_onto_a_Eucalyptus_tree.jpg') center/cover no-repeat;
+      transform: scale(1.02);
+      will-change:transform;
+    }
+    .hero-overlay {
+      position:absolute; inset:0;
+      background: linear-gradient(135deg,rgba(2,12,27,.78) 0%,rgba(7,21,38,.5) 55%,rgba(6,90,90,.45) 100%);
+    }
+    .hero-particles {
+      position:absolute; inset:0; overflow:hidden; pointer-events:none;
+    }
+    .particle {
+      position:absolute; border-radius:50%;
+      background: radial-gradient(circle, rgba(0,196,168,.6), transparent);
+      animation: float linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0); opacity:0; }
+      10% { opacity:.6; }
+      90% { opacity:.3; }
+      100% { transform: translateY(-10vh) scale(1); opacity:0; }
+    }
+    .hero-content {
+      position:relative; z-index:2; text-align:center; padding:0 1.5rem;
+      will-change:transform;
+    }
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-size:.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+      color:var(--aqua); padding:.45rem 1.2rem;
+      border: 1px solid rgba(0,196,168,.35); border-radius:100px;
+      background: rgba(0,196,168,.08); margin-bottom:1.5rem;
+      animation: fadeInDown .9s ease .2s both;
+    }
+    .hero-title {
+      font-family:'Playfair Display',serif; font-weight:900;
+      font-size: clamp(3.8rem,12vw,9.5rem); line-height:.9;
+      letter-spacing:-3px; margin-bottom:1.5rem;
+      animation: fadeInUp .9s ease .4s both;
+    }
+    .hero-title .l1 { display:block; color:var(--white); }
+    .hero-title .l2 {
+      display:block;
+      background: linear-gradient(135deg, var(--aqua) 0%, var(--aqua-light) 50%, var(--gold) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .hero-subtitle {
+      font-size: clamp(.95rem,2.2vw,1.2rem); font-weight:300;
+      color:var(--muted); max-width:580px; margin:0 auto 3rem;
+      line-height:1.75; animation: fadeInUp .9s ease .6s both;
+    }
+    .hero-stats {
+      display:flex; justify-content:center; flex-wrap:wrap; gap:1rem;
+      animation: fadeInUp .9s ease .8s both;
+    }
+    .hero-stat {
+      background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+      border-radius:18px; padding:.9rem 1.4rem; backdrop-filter:blur(12px);
+      text-align:center; min-width:130px;
+      transition: transform .3s, border-color .3s;
+    }
+    .hero-stat:hover { transform:translateY(-4px); border-color:rgba(0,196,168,.4); }
+    .hero-stat .v {
+      font-family:'Playfair Display',serif; font-size:1.75rem; font-weight:700;
+      color:var(--aqua-light); display:block; line-height:1;
+    }
+    .hero-stat .l {
+      font-size:.67rem; font-weight:600; text-transform:uppercase;
+      letter-spacing:1.5px; color:var(--muted); margin-top:.3rem;
+    }
+    .scroll-cue {
+      position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:.5rem;
+      animation: fadeIn 1s ease 1.2s both;
+    }
+    .scroll-cue span { font-size:.65rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); }
+    .scroll-mouse {
+      width:22px; height:36px; border:2px solid rgba(255,255,255,.35);
+      border-radius:11px; display:flex; justify-content:center; padding-top:5px;
+    }
+    .scroll-dot { width:3px; height:7px; background:var(--aqua); border-radius:2px; animation:sdot 1.6s ease-in-out infinite; }
+    @keyframes sdot { 0%,100%{transform:translateY(0);opacity:1;} 50%{transform:translateY(9px);opacity:.3;} }
+
+    /* =============================================
+       SECTION COMMON
+    ============================================= */
+    .section-wrap { position:relative; overflow:hidden; }
+    .sec-img-wrap {
+      position:relative; height:56vh; min-height:360px; overflow:hidden;
+    }
+    .sec-img-wrap img {
+      position:absolute; top:-2%; left:0;
+      width:100%; height:104%; object-fit:cover;
+      object-position:center 50%;
+      will-change:transform; transition:none;
+    }
+    .sec-img-overlay {
+      position:absolute; inset:0;
+      background: linear-gradient(to bottom, rgba(2,12,27,.25) 0%, rgba(2,12,27,.55) 55%, rgba(2,12,27,.92) 100%);
+    }
+    .sec-img-label {
+      position:absolute; bottom:2rem; left:50%;
+      transform:translateX(-50%); text-align:center; z-index:2; width:100%;
+      padding: 0 1rem;
+    }
+    .sec-tag {
+      display:inline-block; font-size:.65rem; font-weight:700;
+      letter-spacing:3px; text-transform:uppercase; color:var(--aqua);
+      padding:.32rem 1rem; border:1px solid rgba(0,196,168,.4);
+      border-radius:100px; background:rgba(0,196,168,.07); margin-bottom:.7rem;
+    }
+    .sec-img-label h2 {
+      font-family:'Playfair Display',serif;
+      font-size: clamp(2rem,6vw,4rem); font-weight:900;
+      color:var(--white); text-shadow:0 4px 20px rgba(0,0,0,.5);
+    }
+    .sec-content { max-width:1300px; margin:0 auto; padding:4rem 2rem 6rem; }
+
+    /* GLASS CARDS */
+    .gc {
+      background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09);
+      border-radius:20px; padding:2rem; backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px); transition:all .4s ease;
+    }
+    .gc:hover {
+      background: rgba(255,255,255,.07); border-color:rgba(0,196,168,.28);
+      transform:translateY(-4px); box-shadow:0 24px 60px rgba(0,0,0,.3);
+    }
+
+    /* GRIDS */
+    .g2 { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
+    .g3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .g4 { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+
+    /* STAT CARDS */
+    .sc {
+      background:var(--glass); border:1px solid rgba(255,255,255,.08);
+      border-radius:16px; padding:1.5rem; text-align:center;
+      transition:all .3s; position:relative; overflow:hidden;
+    }
+    .sc::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg,transparent,var(--aqua),transparent);
+    }
+    .sc:hover { border-color:rgba(0,196,168,.32); transform:translateY(-4px); box-shadow:var(--shadow); }
+    .sc .si { font-size:2.3rem; margin-bottom:.65rem; display:block; }
+    .sc .sn { font-family:'Playfair Display',serif; font-size:1.9rem; font-weight:700; color:var(--aqua-light); display:block; }
+    .sc .sl { font-size:.75rem; color:var(--muted); margin-top:.25rem; font-weight:500; }
+
+    /* INTRO BLOCK */
+    .intro { text-align:center; margin-bottom:3rem; }
+    .intro h3 {
+      font-family:'Playfair Display',serif; font-size:clamp(1.7rem,4vw,2.7rem);
+      font-weight:700; margin-bottom:.8rem;
+      background:linear-gradient(135deg,var(--white),var(--aqua-light));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .intro p { font-size:1rem; color:var(--muted); max-width:700px; margin:0 auto; line-height:1.85; }
+    .divider { width:72px; height:3px; background:linear-gradient(90deg,var(--aqua),var(--aqua-light)); border-radius:2px; margin:.9rem auto 1.3rem; }
+
+    /* TEXT */
+    .t-head { font-family:'Playfair Display',serif; font-size:1.55rem; font-weight:700; color:var(--white); margin-bottom:.9rem; }
+    .t-head span { background:linear-gradient(135deg,var(--aqua),var(--aqua-light)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .t-body { font-size:.92rem; color:var(--muted); line-height:1.85; margin-bottom:.9rem; }
+    .flist { list-style:none; display:flex; flex-direction:column; gap:.55rem; margin-top:.8rem; }
+    .flist li { display:flex; align-items:flex-start; gap:.7rem; font-size:.88rem; color:var(--muted); line-height:1.6; }
+    .flist li::before { content:'▸'; color:var(--aqua); flex-shrink:0; margin-top:2px; }
+
+    /* CHARTS */
+    .chart-box {
+      background:var(--glass); border:1px solid rgba(255,255,255,.08);
+      border-radius:20px; padding:1.5rem;
+    }
+    .chart-title { font-size:.78rem; font-weight:700; color:var(--aqua); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:1.2rem; }
+
+    /* PROGRESS BARS */
+    .pb-wrap { margin-bottom:.85rem; }
+    .pb-label { display:flex; justify-content:space-between; font-size:.78rem; color:var(--muted); margin-bottom:.35rem; }
+    .pb-track { height:5px; background:rgba(255,255,255,.07); border-radius:3px; overflow:hidden; }
+    .pb-fill { height:100%; border-radius:3px; background:linear-gradient(90deg,var(--aqua),var(--aqua-light)); width:0; transition:width 1.6s cubic-bezier(.4,0,.2,1); }
+
+    /* HDI CIRCLE */
+    .hdi-ring {
+      width:170px; height:170px; border-radius:50%;
+      background: conic-gradient(var(--aqua) 0deg, var(--aqua-light) calc(.946*360deg), rgba(255,255,255,.07) calc(.946*360deg));
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 1.5rem; position:relative;
+    }
+    .hdi-inner {
+      width:148px; height:148px; border-radius:50%;
+      background: rgba(7,21,38,.92); display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+    }
+    .hdi-inner .val { font-family:'Playfair Display',serif; font-size:2.1rem; font-weight:900; color:var(--aqua-light); }
+    .hdi-inner .lbl { font-size:.65rem; color:var(--muted); font-weight:500; margin-top:.15rem; }
+
+    /* TIMELINE */
+    .timeline { position:relative; padding-left:1.8rem; }
+    .timeline::before {
+      content:''; position:absolute; left:0; top:0; bottom:0; width:2px;
+      background:linear-gradient(180deg,var(--aqua),var(--aqua-light));
+    }
+    .tl-item { position:relative; margin-bottom:1.8rem; }
+    .tl-item::before {
+      content:''; position:absolute; left:-2.25rem; top:.35rem;
+      width:10px; height:10px; border-radius:50%; background:var(--aqua);
+      box-shadow:0 0 0 4px rgba(0,196,168,.2);
+    }
+    .tl-year { font-size:.7rem; font-weight:700; color:var(--aqua); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.2rem; }
+    .tl-text { font-size:.87rem; color:var(--muted); line-height:1.6; }
+
+    /* ALLIANCE BADGES */
+    .ab {
+      background:var(--glass); border:1px solid rgba(255,255,255,.09);
+      border-radius:14px; padding:1.1rem; text-align:center; transition:all .3s;
+    }
+    .ab:hover { border-color:rgba(0,196,168,.38); background:rgba(0,196,168,.07); transform:translateY(-3px); }
+    .ab .ai { font-size:1.9rem; display:block; margin-bottom:.45rem; }
+    .ab .an { font-weight:700; font-size:.88rem; color:var(--white); margin-bottom:.25rem; }
+    .ab .ad { font-size:.73rem; color:var(--muted); line-height:1.5; }
+
+    /* SPECIES CARDS */
+    .sp-card {
+      background:var(--glass); border:1px solid rgba(255,255,255,.08);
+      border-radius:16px; padding:1.5rem; text-align:center; transition:all .3s;
+    }
+    .sp-card:hover { border-color:rgba(0,196,168,.3); transform:translateY(-5px); box-shadow:var(--shadow); }
+    .sp-card .sp-ico { font-size:3rem; display:block; margin-bottom:.65rem; }
+    .sp-card .sp-name { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--white); margin-bottom:.3rem; }
+    .sp-card .sp-count { font-size:.78rem; color:var(--aqua); font-weight:600; }
+    .sp-card .sp-desc { font-size:.78rem; color:var(--muted); margin-top:.45rem; line-height:1.5; }
+
+    /* DESTINATION CARDS */
+    .dest-card {
+      position:relative; border-radius:18px; overflow:hidden;
+      height:260px; cursor:pointer;
+    }
+    .dest-card img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+    .dest-card:hover img { transform:scale(1.02); }
+    .dest-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(2,12,27,.88) 0%,transparent 60%); }
+    .dest-info { position:absolute; bottom:0; left:0; right:0; padding:1.1rem 1.2rem; }
+    .dest-name { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:var(--white); margin-bottom:.2rem; }
+    .dest-sub { font-size:.75rem; color:var(--muted); }
+
+    /* OPERA GALLERY */
+    .opera-gallery {
+      display:grid; grid-template-columns:2fr 1fr;
+      grid-template-rows:200px 200px; gap:.9rem;
+      border-radius:18px; overflow:hidden;
+    }
+    .og-main { grid-row:1/3; }
+    .og-wrap { overflow:hidden; position:relative; }
+    .og-wrap img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+    .og-wrap:hover img { transform:scale(1.015); }
+
+    /* FOOTER */
+    footer {
+      background:rgba(2,12,27,.85); border-top:1px solid rgba(255,255,255,.08);
+      padding:3rem 2rem; text-align:center;
+    }
+    .footer-logo {
+      font-family:'Playfair Display',serif; font-size:2rem; font-weight:900;
+      background:linear-gradient(135deg,var(--aqua),var(--aqua-light));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:.8rem;
+    }
+    footer p { color:var(--muted); font-size:.82rem; line-height:1.8; }
+    .footer-links { display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap; margin-top:1.2rem; }
+    .footer-links a { color:var(--aqua); text-decoration:none; font-size:.78rem; font-weight:600; transition:color .25s; }
+    .footer-links a:hover { color:var(--aqua-light); }
+
+    /* REVEAL ANIMATIONS */
+    .reveal { opacity:0; transform:translateY(40px); transition:opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .rev-l { opacity:0; transform:translateX(-40px); transition:opacity .8s ease, transform .8s ease; }
+    .rev-l.visible { opacity:1; transform:translateX(0); }
+    .rev-r { opacity:0; transform:translateX(40px); transition:opacity .8s ease, transform .8s ease; }
+    .rev-r.visible { opacity:1; transform:translateX(0); }
+    .d1{transition-delay:.1s;} .d2{transition-delay:.2s;} .d3{transition-delay:.3s;} .d4{transition-delay:.4s;} .d5{transition-delay:.5s;}
+
+    /* KEYFRAMES */
+    @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+    /* RESPONSIVE */
+    @media(max-width:1024px) {
+      .g4{grid-template-columns:repeat(2,1fr);}
+      .g3{grid-template-columns:repeat(2,1fr);}
+    }
+    @media(max-width:768px) {
+      .nav-links{display:none;}
+      .hamburger{display:flex;}
+      .g2,.g3{grid-template-columns:1fr;}
+      .g4{grid-template-columns:repeat(2,1fr);}
+      .opera-gallery{grid-template-columns:1fr;grid-template-rows:240px 160px 160px;}
+      .og-main{grid-row:auto;}
+      body{background-attachment:scroll;}
+      .hero-bg{transform:none!important;background-attachment:scroll;}
+      .hero-content{transform:none!important;}
+      .sec-img-wrap img{transform:none!important;top:0;height:100%;}
+      .falling-koala { width: 72px; }
+    }
+    @media(max-width:480px){
+      .g4{grid-template-columns:1fr;}
+      .hero-stat{min-width:100px;padding:.7rem .9rem;}
+      .hero-stats{gap:.6rem;}
+      .falling-koala { width: 58px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="koala-rain"></div>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo"><span class="nav-flag">🇦🇺</span> Austrália</a>
+      <ul class="nav-links">
+        <li><a href="#geography">Geografia</a></li>
+        <li><a href="#economy">Economia</a></li>
+        <li><a href="#hdi">IDH</a></li>
+        <li><a href="#education">Educação</a></li>
+        <li><a href="#society">Sociedade</a></li>
+        <li><a href="#biodiversity">Biodiversidade</a></li>
+        <li><a href="#tourism">Turismo</a></li>
+        <li><a href="#relations">Relações</a></li>
+      </ul>
+      <button class="hamburger" id="hbtn" aria-label="Menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mMenu">
+    <ul>
+      <li><a href="#geography" onclick="closeMenu()">Geografia</a></li>
+      <li><a href="#economy" onclick="closeMenu()">Economia & PIB</a></li>
+      <li><a href="#hdi" onclick="closeMenu()">IDH</a></li>
+      <li><a href="#education" onclick="closeMenu()">Educação</a></li>
+      <li><a href="#society" onclick="closeMenu()">Sociedade</a></li>
+      <li><a href="#biodiversity" onclick="closeMenu()">Biodiversidade</a></li>
+      <li><a href="#tourism" onclick="closeMenu()">Turismo</a></li>
+      <li><a href="#relations" onclick="closeMenu()">Relações Internacionais</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content" id="heroContent">
+      <div class="hero-eyebrow">🌏 Projeto Escolar · 2024</div>
+      <h1 class="hero-title">
+        <span class="l1">Terra dos</span>
+        <span class="l2">Coalas</span>
+      </h1>
+      <p class="hero-subtitle">Uma viagem completa por uma das nações mais extraordinárias do mundo — dos desertos vermelhos às barreiras de coral, das metrópoles vibrantes à natureza selvagem.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="v">7.69M</span><span class="l">km² Área</span></div>
+        <div class="hero-stat"><span class="v">26.5M</span><span class="l">População</span></div>
+        <div class="hero-stat"><span class="v">0.946</span><span class="l">Índice IDH</span></div>
+        <div class="hero-stat"><span class="v">$1.7T</span><span class="l">PIB (USD)</span></div>
+        <div class="hero-stat"><span class="v">#7</span><span class="l">Ranking IDH</span></div>
+      </div>
+    </div>
+    <div class="scroll-cue">
+      <span>Rolar</span>
+      <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+    </div>
+  </section>
+
+  <!-- ===== GEOGRAPHY ===== -->
+  <section id="geography" class="section-wrap">
+    <div class="sec-img-wrap" id="img-geo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Aerial_View_of_Uluru_-_2013.04_-_panoramio.jpg/1280px-Aerial_View_of_Uluru_-_2013.04_-_panoramio.jpg" alt="Vista aérea de Uluru e do Outback australiano" id="pimg-geo" />
+      <div class="sec-img-overlay"></div>
+      <div class="sec-img-label">
+        <span class="sec-tag">Capítulo 01</span>
+        <h2>Geografia</h2>
+      </div>
+    </div>
+    <div class="sec-content">
+      <div class="intro reveal">
+        <h3>O Maior Continente-Ilha do Mundo</h3>
+        <div class="divider"></div>
+        <p>A Austrália ocupa um continente inteiro — o menor e mais plano da Terra, porém um dos mais antigos geologicamente. Dos desertos vermelhos às florestas tropicais, dos planaltos alpinos às praias infinitas.</p>
+      </div>
+      <div class="g4" style="margin-bottom:3rem">
+        <div class="sc reveal d1"><span class="si">🗺️</span><span class="sn">7.69M</span><span class="sl">Área Total (km²)</span></div>
+        <div class="sc reveal d2"><span class="si">🌊</span><span class="sn">25.760</span><span class="sl">Litoral (km)</span></div>
+        <div class="sc reveal d3"><span class="si">🏛️</span><span class="sn">6 + 2</span><span class="sl">Estados e Territórios</span></div>
+        <div class="sc reveal d4"><span class="si">🌡️</span><span class="sn">56.7°C</span><span class="sl">Temperatura Máxima</span></div>
+      </div>
+      <div class="g2">
+        <div class="gc rev-l">
+          <h3 class="t-head">Um Continente de <span>Extremos</span></h3>
+          <p class="t-body">A Austrália se estende por cerca de 3.700 km de norte a sul e 4.000 km de leste a oeste. Localizada no Hemisfério Sul, é banhada pelo Oceano Índico a oeste e sul, e pelo Oceano Pacífico a leste.</p>
+          <p class="t-body">Cinco grandes zonas geográficas a definem: o interior árido (Outback), as florestas tropicais do nordeste, as planícies costeiras férteis, a Grande Cordilheira Divisora e a vasta Planície de Nullarbor.</p>
+          <ul class="flist">
+            <li>Uluru (Ayers Rock) ergue-se 348m acima das planícies do deserto central</li>
+            <li>A Grande Barreira de Coral se estende por 2.300 km ao largo de Queensland</li>
+            <li>Monte Kosciuszko é o ponto mais alto com 2.228m</li>
+            <li>O sistema Murray-Darling drena mais de 1 milhão de km²</li>
+            <li>70% do continente é árido ou semi-árido</li>
+          </ul>
+        </div>
+        <div class="gc rev-r">
+          <h3 class="t-head">Estados e <span>Territórios</span></h3>
+          <p class="t-body" style="margin-bottom:1.4rem">Dividida em seis estados e dois territórios continentais. A Austrália Ocidental sozinha ocupa cerca de um terço do continente.</p>
+          <div class="pb-wrap"><div class="pb-label"><span>Austrália Ocidental</span><span>33%</span></div><div class="pb-track"><div class="pb-fill" data-w="33"></div></div></div>
+          <div class="pb-wrap"><div class="pb-label"><span>Queensland</span><span>22%</span></div><div class="pb-track"><div class="pb-fill" data-w="22"></div></div></div>
+          <div class="pb-wrap"><div class="pb-label"><span>Território do Norte</span><span>18%</span></div><div class="pb-track"><div class="pb-fill" data-w="18"></div></div></div>
+          <div class="pb-wrap"><div class="pb-label"><span>Austrália Meridional</span><span>13%</span></div><div class="pb-track"><div class="pb-fill" data-w="13"></div></div></div>
+          <div class="pb-wrap"><div class="pb-label"><span>Nova Gales do Sul</span><span>10%</span></div><div class="pb-track"><div class="pb-fill" data-w="10"></div></div></div>
+          <div class="pb-wrap"><div class="pb-label"><span>Vitória</span><span>3%</span></div><div class="pb-track"><div class="pb-fill" data-w="3"></div></div></div>
+          <div class="pb-wrap"><div class="pb-label"><span>Tasmânia</span><span>0.9%</span></div><div class="pb-track"><div class="pb-fill" data-w="0.9"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ECONOMY ===== -->
+  <section id="economy" class="section-wrap">
+    <div class="sec-img-wrap" id="img-eco">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Sydney_%28AU%29%2C_Skyline_--_2019_--_2287.jpg/1280px-Sydney_%28AU%29%2C_Skyline_--_2019_--_2287.jpg" alt="Centro financeiro de Sydney" id="pimg-eco" />
+      <div class="sec-img-overlay"></div>
+      <div class="sec-img-label">
+        <span class="sec-tag">Capítulo 02</span>
+        <h2>Economia & PIB</h2>
+      </div>
+    </div>
+    <div class="sec-content">
+      <div class="intro reveal">
+        <h3>Uma Potência Econômica Resiliente</h3>
+        <div class="divider"></div>
+        <p>A Austrália possui a 12ª maior economia mundial e manteve 28 anos seguidos de crescimento do PIB antes da COVID-19 — o maior período ininterrupto entre nações desenvolvidas.</p>
+      </div>
+      <div class="g4" style="margin-bottom:3rem">
+        <div class="sc reveal d1"><span class="si">💰</span><span class="sn">$1.7T</span><span class="sl">PIB Nominal (USD)</span></div>
+        <div class="sc reveal d2"><span class="si">📈</span><span class="sn">$65K</span><span class="sl">PIB per capita</span></div>
+        <div class="sc reveal d3"><span class="si">📉</span><span class="sn">3.8%</span><span class="sl">Taxa de Desemprego</span></div>
+        <div class="sc reveal d4"><span class="si">🏦</span><span class="sn">12ª</span><span class="sl">Maior Economia</span></div>
+      </div>
+      <div class="g2" style="margin-bottom:2.5rem">
+        <div class="chart-box rev-l">
+          <div class="chart-title">Crescimento do PIB 1990–2024 (Bilhões USD)</div>
+          <canvas id="gdpChart" height="250"></canvas>
+        </div>
+        <div class="chart-box rev-r">
+          <div class="chart-title">Principais Parceiros de Exportação (2023)</div>
+          <canvas id="exportChart" height="250"></canvas>
+        </div>
+      </div>
+      <div class="gc reveal">
+        <h3 class="t-head" style="margin-bottom:1.5rem">Principais Setores <span>Econômicos</span></h3>
+        <div class="g3">
+          <div>
+            <div style="font-size:2rem;margin-bottom:.5rem">⛏️</div>
+            <div style="font-weight:700;color:var(--white);margin-bottom:.5rem;font-size:1rem">Mineração & Recursos</div>
+            <p style="font-size:.85rem;color:var(--muted);line-height:1.65">Maior exportador mundial de minério de ferro, carvão e GNL. Responsável por mais de US$ 300 bilhões em receitas anuais.</p>
+          </div>
+          <div>
+            <div style="font-size:2rem;margin-bottom:.5rem">🏗️</div>
+            <div style="font-weight:700;color:var(--white);margin-bottom:.5rem;font-size:1rem">Serviços & Finanças</div>
+            <p style="font-size:.85rem;color:var(--muted);line-height:1.65">Representam cerca de 70% do PIB. Sydney e Melbourne são grandes centros financeiros da Ásia-Pacífico.</p>
+          </div>
+          <div>
+            <div style="font-size:2rem;margin-bottom:.5rem">🌾</div>
+            <div style="font-weight:700;color:var(--white);margin-bottom:.5rem;font-size:1rem">Agricultura & Vinhos</div>
+            <p style="font-size:.85rem;color:var(--muted);line-height:1.65">Um dos maiores exportadores de trigo, lã, carne bovina e vinhos premium, alimentando milhões de pessoas ao redor do mundo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HDI ===== -->
+  <section id="hdi" class="section-wrap">
+    <div class="sec-img-wrap" id="img-hdi">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Pilatus_PC-12_VH-FGT_operated_by_the_Royal_Flying_Doctor_Service_parked_at_Andamooka_Airport%2C_South_Australia.jpg/1280px-Pilatus_PC-12_VH-FGT_operated_by_the_Royal_Flying_Doctor_Service_parked_at_Andamooka_Airport%2C_South_Australia.jpg" alt="Avião do Royal Flying Doctor Service na Austrália do Sul" id="pimg-hdi" />
+      <div class="sec-img-overlay"></div>
+      <div class="sec-img-label">
+        <span class="sec-tag">Capítulo 03</span>
+        <h2>Índice de Desenvolvimento Humano</h2>
+      </div>
+    </div>
+    <div class="sec-content">
+      <div class="intro reveal">
+        <h3>Entre as Nações Mais Desenvolvidas do Mundo</h3>
+        <div class="divider"></div>
+        <p>A Austrália figura consistentemente no top 10 global do IDH, refletindo excelência em saúde, educação, renda e qualidade de vida.</p>
+      </div>
+      <div class="g2" style="margin-bottom:2.5rem;align-items:center">
+        <div class="rev-l">
+          <div class="gc" style="text-align:center">
+            <div class="hdi-ring">
+              <div class="hdi-inner">
+                <span class="val">0.946</span>
+                <span class="lbl">IDH</span>
+              </div>
+            </div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:.4rem">Desenvolvimento Muito Alto</h3>
+            <p style="font-size:.85rem;color:var(--muted)">Classificado em <strong style="color:var(--aqua-light)">7º lugar mundial</strong> no Relatório do PNUD 2023</p>
+            <div style="margin-top:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;text-align:left">
+              <div><div style="font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Expectativa de Vida</div><div style="font-size:1.25rem;font-weight:700;color:var(--aqua-light)">83.4 anos</div></div>
+              <div><div style="font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px">RNB per capita</div><div style="font-size:1.25rem;font-weight:700;color:var(--aqua-light)">$48.085</div></div>
+              <div><div style="font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Anos esperados</div><div style="font-size:1.25rem;font-weight:700;color:var(--aqua-light)">22.1 anos</div></div>
+              <div><div style="font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Anos médios</div><div style="font-size:1.25rem;font-weight:700;color:var(--aqua-light)">12.9 anos</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="chart-box rev-r">
+          <div class="chart-title">Comparação do IDH — Principais Nações (2023)</div>
+          <canvas id="hdiChart" height="280"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EDUCATION ===== -->
+  <section id="education" class="section-wrap">
+    <div class="sec-img-wrap" id="img-edu">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Main_Quadrangle%2C_University_of_Sydney_%28cropped%29.jpg/1280px-Main_Quadrangle%2C_University_of_Sydney_%28cropped%29.jpg" alt="Quadrilátero principal da Universidade de Sydney" id="pimg-edu" />
+      <div class="sec-img-overlay"></div>
+      <div class="sec-img-label">
+        <span class="sec-tag">Capítulo 04</span>
+        <h2>Educação</h2>
+      </div>
+    </div>
+    <div class="sec-content">
+      <div class="intro reveal">
+        <h3>Um Sistema Educacional de Classe Mundial</h3>
+        <div class="divider"></div>
+        <p>O país abriga 8 das 100 melhores universidades do mundo e é o terceiro destino mais procurado por estudantes internacionais, recebendo mais de 750.000 alunos de mais de 190 países.</p>
+      </div>
+      <div class="g4" style="margin-bottom:3rem">
+        <div class="sc reveal d1"><span class="si">📚</span><span class="sn">99%</span><span class="sl">Alfabetização</span></div>
+        <div class="sc reveal d2"><span class="si">🎓</span><span class="sn">42</span><span class="sl">Universidades</span></div>
+        <div class="sc reveal d3"><span class="si">🌍</span><span class="sn">750K+</span><span class="sl">Estudantes Internacionais</span></div>
+        <div class="sc reveal d4"><span class="si">🔬</span><span class="sn">8</span><span class="sl">Entre as Top 100</span></div>
+      </div>
+      <div class="g2">
+        <div class="chart-box rev-l">
+          <div class="chart-title">Nível de Escolaridade da População (%)</div>
+          <canvas id="eduChart" height="280"></canvas>
+        </div>
+        <div class="gc rev-r">
+          <h3 class="t-head">Principais Universidades <span>Australianas</span></h3>
+          <div style="margin-top:1rem">
+            <div class="pb-wrap"><div class="pb-label"><span>Universidade de Melbourne</span><span>#14 Mundial</span></div><div class="pb-track"><div class="pb-fill" data-w="92"></div></div></div>
+            <div class="pb-wrap"><div class="pb-label"><span>Universidade de Sydney</span><span>#18 Mundial</span></div><div class="pb-track"><div class="pb-fill" data-w="88"></div></div></div>
+            <div class="pb-wrap"><div class="pb-label"><span>ANU — Canberra</span><span>#30 Mundial</span></div><div class="pb-track"><div class="pb-fill" data-w="82"></div></div></div>
+            <div class="pb-wrap"><div class="pb-label"><span>UNSW Sydney</span><span>#33 Mundial</span></div><div class="pb-track"><div class="pb-fill" data-w="78"></div></div></div>
+            <div class="pb-wrap"><div class="pb-label"><span>Monash University</span><span>#42 Mundial</span></div><div class="pb-track"><div class="pb-fill" data-w="73"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SOCIETY ===== -->
+  <section id="society" class="section-wrap">
+    <div class="sec-img-wrap" id="img-soc">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Australia_Day_Citizenship_Ceremony_2011_%285475198425%29.jpg/1280px-Australia_Day_Citizenship_Ceremony_2011_%285475198425%29.jpg" alt="Cerimônia de cidadania australiana" id="pimg-soc" />
+      <div class="sec-img-overlay"></div>
+      <div class="sec-img-label">
+        <span class="sec-tag">Capítulo 05</span>
+        <h2>Sociedade & Cultura</h2>
+      </div>
+    </div>
+    <div class="sec-content">
+      <div class="intro reveal">
+        <h3>Uma Nação Orgulhosamente Multicultural</h3>
+        <div class="divider"></div>
+        <p>Mais de 300 idiomas são falados e pessoas de 190 países chamam a Austrália de lar. Os povos aborígenes possuem uma das culturas vivas mais antigas do planeta, com mais de 65.000 anos de história.</p>
+      </div>
+      <div class="g2" style="margin-bottom:2.5rem">
+        <div class="gc rev-l">
+          <h3 class="t-head">Demografia e <span>Povo</span></h3>
+          <p class="t-body">A população de 26,5 milhões concentra-se majoritariamente ao longo das costas sudeste e sudoeste. Sydney e Melbourne abrigam quase 40% da população.</p>
+          <ul class="flist">
+            <li>Mais de 300 idiomas falados em todo o país</li>
+            <li>Inglês é o idioma predominante</li>
+            <li>Povos Aborígenes e Torres Strait Islanders: ~3,8% da população</li>
+            <li>Principais origens migratórias: Reino Unido, Índia, China, Nova Zelândia, Filipinas</li>
+            <li>Idade média: 38,6 anos</li>
+            <li>População urbana: 86%</li>
+          </ul>
+        </div>
+        <div class="chart-box rev-r">
+          <div class="chart-title">População por Estado — 2024 (Milhões)</div>
+          <canvas id="popChart" height="280"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BIODIVERSITY ===== -->
+  <section id="biodiversity" class="section-wrap">
+    <div class="sec-img-wrap" id="img-bio">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Great_Barrier_Reef_snorkeling_11.jpg/1280px-Great_Barrier_Reef_snorkeling_11.jpg" alt="Corais e peixes na Grande Barreira de Coral" id="pimg-bio" />
+      <div class="sec-img-overlay"></div>
+      <div class="sec-img-label">
+        <span class="sec-tag">Capítulo 06</span>
+        <h2>Biodiversidade</h2>
+      </div>
+    </div>
+    <div class="sec-content">
+      <div class="intro reveal">
+        <h3>Um Hotspot de Biodiversidade Global</h3>
+        <div class="divider"></div>
+        <p>Um dos 17 países megadiversos do planeta. Cerca de 80% de suas plantas, mamíferos e répteis não existem em nenhum outro lugar do mundo.</p>
+      </div>
+      <div class="g4" style="margin-bottom:3rem">
+        <div class="sp-card reveal d1"><span class="sp-ico">🦘</span><div class="sp-name">Marsupiais</div><div class="sp-count">350+ espécies</div><div class="sp-desc">Cangurus, coalas, wombats, wallabies e demônios-da-tasmânia</div></div>
+        <div class="sp-card reveal d2"><span class="sp-ico">🐍</span><div class="sp-name">Répteis</div><div class="sp-count">860+ espécies</div><div class="sp-desc">Um dos maiores contingentes de serpentes venenosas do mundo</div></div>
+        <div class="sp-card reveal d3"><span class="sp-ico">🦜</span><div class="sp-name">Aves</div><div class="sp-count">900+ espécies</div><div class="sp-desc">Emus, cacatuas, kookaburras e a ave-lira</div></div>
+        <div class="sp-card reveal d4"><span class="sp-ico">🐠</span><div class="sp-name">Vida Marinha</div><div class="sp-count">4.000+ espécies</div><div class="sp-desc">A Grande Barreira abriga mais de 1.500 espécies de peixes</div></div>
+      </div>
+      <div class="g2">
+        <div class="gc rev-l">
+          <h3 class="t-head">A Grande Barreira de <span>Coral</span></h3>
+          <p class="t-body">A maior estrutura viva do planeta, visível do espaço. Patrimônio Mundial da UNESCO desde 1981, sustenta uma economia turística bilionária.</p>
+          <ul class="flist">
+            <li>1.500 espécies de peixes</li>
+            <li>6 das 7 espécies de tartarugas marinhas do mundo</li>
+            <li>Mais de 30 espécies de golfinhos, botos e baleias</li>
+            <li>240 espécies de aves</li>
+            <li>Mais de 400 tipos de coral</li>
+          </ul>
+        </div>
+        <div class="chart-box rev-r">
+          <div class="chart-title">Espécies Endêmicas da Austrália (%)</div>
+          <canvas id="biodivChart" height="280"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOURISM ===== -->
+  <section id="tourism" class="section-wrap">
+    <div class="sec-img-wrap" id="img-tour">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Petermann_Ranges_%28AU%29%2C_Uluru-Kata_Tjuta_National_Park%2C_Uluru_--_2019_--_3688.jpg/1280px-Petermann_Ranges_%28AU%29%2C_Uluru-Kata_Tjuta_National_Park%2C_Uluru_--_2019_--_3688.jpg" alt="Uluru ao pôr do sol" id="pimg-tour" />
+      <div class="sec-img-overlay"></div>
+      <div class="sec-img-label">
+        <span class="sec-tag">Capítulo 07</span>
+        <h2>Turismo</h2>
+      </div>
+    </div>
+    <div class="sec-content">
+      <div class="intro reveal">
+        <h3>Um Sonho Para o Mundo Inteiro</h3>
+        <div class="divider"></div>
+        <p>Marcos icônicos, praias lendárias, desertos sagrados e uma vida marinha única fazem da Austrália um dos destinos mais desejados do planeta.</p>
+      </div>
+      <div class="g4" style="margin-bottom:3rem">
+        <div class="sc reveal d1"><span class="si">✈️</span><span class="sn">9M+</span><span class="sl">Visitantes Anuais</span></div>
+        <div class="sc reveal d2"><span class="si">💵</span><span class="sn">$45B</span><span class="sl">Receita Turística</span></div>
+        <div class="sc reveal d3"><span class="si">🏆</span><span class="sn">20</span><span class="sl">Sítios UNESCO</span></div>
+        <div class="sc reveal d4"><span class="si">🌍</span><span class="sn">6º</span><span class="sl">Mais Visitado</span></div>
+      </div>
+      <div class="gc reveal" style="margin-bottom:2.5rem">
+        <h3 class="t-head" style="text-align:center;font-size:1.75rem;margin-bottom:1.5rem">🎭 Casa de Ópera de Sydney</h3>
+        <div class="opera-gallery">
+          <div class="og-wrap og-main">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Sydney_Opera_House_and_Harbour_Bridge_Dusk_%283%29_2019-06-21.jpg/1280px-Sydney_Opera_House_and_Harbour_Bridge_Dusk_%283%29_2019-06-21.jpg" alt="Casa de Ópera de Sydney e Harbour Bridge ao entardecer" />
+          </div>
+          <div class="og-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Sydney_Harbour_Bridge_from_Circular_Quay.jpg/1280px-Sydney_Harbour_Bridge_from_Circular_Quay.jpg" alt="Sydney Harbour Bridge visto de Circular Quay" />
+          </div>
+          <div class="og-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Sydney_%28AU%29%2C_Opera_House_--_2019_--_2994.jpg/1280px-Sydney_%28AU%29%2C_Opera_House_--_2019_--_2994.jpg" alt="Detalhe das velas da Opera House" />
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.75rem;text-align:center">
+          <div><div style="font-size:1.7rem;font-weight:900;color:var(--aqua-light);font-family:'Playfair Display',serif">1973</div><div style="font-size:.75rem;color:var(--muted)">Inauguração</div></div>
+          <div><div style="font-size:1.7rem;font-weight:900;color:var(--aqua-light);font-family:'Playfair Display',serif">10M+</div><div style="font-size:.75rem;color:var(--muted)">Visitantes/ano</div></div>
+          <div><div style="font-size:1.7rem;font-weight:900;color:var(--aqua-light);font-family:'Playfair Display',serif">2007</div><div style="font-size:.75rem;color:var(--muted)">Patrimônio Mundial</div></div>
+        </div>
+      </div>
+      <div class="g3" style="margin-bottom:2.5rem">
+        <div class="dest-card reveal d1">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Petermann_Ranges_%28AU%29%2C_Uluru-Kata_Tjuta_National_Park%2C_Uluru_--_2019_--_3701.jpg/1280px-Petermann_Ranges_%28AU%29%2C_Uluru-Kata_Tjuta_National_Park%2C_Uluru_--_2019_--_3701.jpg" alt="Uluru" />
+          <div class="dest-overlay"></div>
+          <div class="dest-info"><div class="dest-name">Uluru</div><div class="dest-sub">Coração sagrado do Red Centre</div></div>
+        </div>
+        <div class="dest-card reveal d2">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Acanthurus_lineatus_Flynn_Reef.jpg/1280px-Acanthurus_lineatus_Flynn_Reef.jpg" alt="Peixe e corais na Grande Barreira de Coral" />
+          <div class="dest-overlay"></div>
+          <div class="dest-info"><div class="dest-name">Grande Barreira de Coral</div><div class="dest-sub">Maior ecossistema de corais do mundo</div></div>
+        </div>
+        <div class="dest-card reveal d3">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Australian_Outback.jpg/1280px-Australian_Outback.jpg" alt="Outback australiano" />
+          <div class="dest-overlay"></div>
+          <div class="dest-info"><div class="dest-name">O Outback</div><div class="dest-sub">O interior vasto e lendário da Austrália</div></div>
+        </div>
+      </div>
+      <div class="chart-box reveal">
+        <div class="chart-title">Visitantes Internacionais por País de Origem (Milhões, 2023)</div>
+        <canvas id="tourismChart" height="180"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INTERNATIONAL RELATIONS ===== -->
+  <section id="relations" class="section-wrap">
+    <div class="sec-img-wrap" id="img-rel">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Parliament_House_at_dusk%2C_Canberra_ACT.jpg/1280px-Parliament_House_at_dusk%2C_Canberra_ACT.jpg" alt="Parlamento australiano em Canberra ao entardecer" id="pimg-rel" />
+      <div class="sec-img-overlay"></div>
+      <div class="sec-img-label">
+        <span class="sec-tag">Capítulo 08</span>
+        <h2>Relações Internacionais</h2>
+      </div>
+    </div>
+    <div class="sec-content">
+      <div class="intro reveal">
+        <h3>Um Ator-Chave na Indo-Pacífico</h3>
+        <div class="divider"></div>
+        <p>A Austrália mantém alianças sólidas com o Ocidente, ao mesmo tempo em que fortalece sua presença e cooperação em toda a região Indo-Pacífica.</p>
+      </div>
+      <div class="g2" style="margin-bottom:2.5rem">
+        <div class="gc rev-l">
+          <h3 class="t-head">Principais <span>Alianças</span></h3>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;margin-top:1.2rem">
+            <div class="ab"><span class="ai">🤝</span><div class="an">AUKUS</div><div class="ad">Pacto com EUA e Reino Unido para submarinos nucleares e tecnologia avançada</div></div>
+            <div class="ab"><span class="ai">👁️</span><div class="an">Five Eyes</div><div class="ad">Aliança de inteligência com EUA, Reino Unido, Canadá e Nova Zelândia</div></div>
+            <div class="ab"><span class="ai">🛡️</span><div class="an">ANZUS</div><div class="ad">Tratado de defesa mútua com EUA e Nova Zelândia desde 1951</div></div>
+            <div class="ab"><span class="ai">🌏</span><div class="an">ASEAN+</div><div class="ad">Parceria ampla com os países do Sudeste Asiático</div></div>
+          </div>
+        </div>
+        <div class="gc rev-r">
+          <h3 class="t-head">Principais Marcos <span>Diplomáticos</span></h3>
+          <div class="timeline" style="margin-top:1.2rem">
+            <div class="tl-item"><div class="tl-year">1901</div><div class="tl-text">Federação das seis colônias formando a Comunidade da Austrália</div></div>
+            <div class="tl-item"><div class="tl-year">1945</div><div class="tl-text">Membro fundador das Nações Unidas</div></div>
+            <div class="tl-item"><div class="tl-year">1951</div><div class="tl-text">Assinatura do Tratado ANZUS</div></div>
+            <div class="tl-item"><div class="tl-year">1973</div><div class="tl-text">Fim gradual da Política da Austrália Branca</div></div>
+            <div class="tl-item"><div class="tl-year">2021</div><div class="tl-text">Anúncio da aliança trilateral AUKUS</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">🇦🇺 Austrália</div>
+    <p>Projeto Escolar — Todas as informações originais mantidas.<br />Imagens trocadas por versões únicas. Fotos: Wikimedia Commons. Animação de coalas caindo adicionada.</p>
+    <div class="footer-links">
+      <a href="#hero">Voltar ao Topo</a>
+      <a href="index.html">Ver versão original</a>
+      <a href="deep.html">Ver versão "Deep Australia"</a>
+    </div>
+    <p style="margin-top:1.5rem;opacity:.5">© 2024 — Coalas em Queda Livre</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mMenu').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mMenu').classList.remove('open');
+    }
+
+    const reveals = document.querySelectorAll('.reveal, .rev-l, .rev-r');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => obs.observe(r));
+
+    const fills = document.querySelectorAll('.pb-fill');
+    const pob = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.width = e.target.getAttribute('data-w') + '%';
+          pob.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    fills.forEach(f => pob.observe(f));
+
+    const particles = document.getElementById('particles');
+    for (let i = 0; i < 26; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const s = Math.random() * 4 + 2;
+      p.style.width = s + 'px';
+      p.style.height = s + 'px';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (Math.random() * 14 + 10) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      particles.appendChild(p);
+    }
+
+    const heroBg = document.getElementById('heroBg');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      heroBg.style.transform = `scale(1.02) translateY(${y * 0.12}px)`;
+    });
+
+    const koalaImgs = [
+      'https://upload.wikimedia.org/wikipedia/commons/5/55/Koala_eucalyptus.JPG',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Koala_in_eucalyptus.jpg/1280px-Koala_in_eucalyptus.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Koala_resting_in_eucalyptus.jpg/1280px-Koala_resting_in_eucalyptus.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Koala_portrait.jpg/1280px-Koala_portrait.jpg'
+    ];
+
+    const rain = document.getElementById('koala-rain');
+    function spawnKoala() {
+      const img = document.createElement('img');
+      img.className = 'falling-koala';
+      img.src = koalaImgs[Math.floor(Math.random() * koalaImgs.length)];
+      img.alt = 'Coala caindo';
+      img.style.left = Math.random() * (window.innerWidth - 110) + 'px';
+      const dur = Math.random() * 5.5 + 7.5;
+      img.style.animationDuration = dur + 's';
+      img.style.transform = `rotate(${(Math.random() * 40) - 20}deg)`;
+      rain.appendChild(img);
+      setTimeout(() => { img.remove(); }, dur * 1000 + 600);
+    }
+    for (let i = 0; i < 6; i++) setTimeout(spawnKoala, i * 900);
+    setInterval(spawnKoala, 1600);
+
+    new Chart(document.getElementById('gdpChart'), {
+      type: 'line',
+      data: {
+        labels: ['1990','1995','2000','2005','2010','2015','2020','2024'],
+        datasets: [{
+          data: [310,435,415,730,1250,1350,1330,1702],
+          borderColor: '#00c4a8',
+          backgroundColor: 'rgba(0,196,168,0.12)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 3
+        }]
+      },
+      options: { plugins:{legend:{display:false}}, scales:{x:{grid:{color:'rgba(255,255,255,0.05)'}}, y:{grid:{color:'rgba(255,255,255,0.05)'}}}, responsive:true }
+    });
+
+    new Chart(document.getElementById('exportChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['China','Japão','Coreia do Sul','Índia','EUA','Outros'],
+        datasets: [{
+          data: [34,19,8,6,5,28],
+          backgroundColor: ['#00c4a8','#00d4b8','#7fffd4','rgba(0,196,168,0.6)','rgba(127,255,212,0.4)','rgba(255,255,255,0.18)'],
+          borderWidth: 0
+        }]
+      },
+      options: { plugins:{legend:{position:'bottom', labels:{color:'rgba(232,248,245,0.8)'}}}, cutout:'62%', responsive:true }
+    });
+
+    new Chart(document.getElementById('hdiChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Suíça','Noruega','Islândia','Dinamarca','Suécia','Irlanda','Austrália','Países Baixos','Finlândia','Singapura'],
+        datasets: [{
+          data: [0.962,0.961,0.959,0.952,0.952,0.950,0.946,0.946,0.942,0.939],
+          backgroundColor: (ctx) => ctx.dataIndex === 6 ? '#00c4a8' : 'rgba(0,196,168,0.28)',
+          borderRadius: 6
+        }]
+      },
+      options: { indexAxis:'y', plugins:{legend:{display:false}}, scales:{x:{grid:{color:'rgba(255,255,255,0.05)'}, min:0.92}, y:{grid:{display:false}}}, responsive:true }
+    });
+
+    new Chart(document.getElementById('eduChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Ensino Fundamental','Ensino Médio','Formação Profissional','Graduação','Pós-Graduação'],
+        datasets: [{
+          data: [99,88,35,47,18],
+          backgroundColor: ['#00c4a8','rgba(0,196,168,0.8)','rgba(0,212,184,0.7)','rgba(0,196,168,0.55)','rgba(127,255,212,0.5)'],
+          borderRadius: 6
+        }]
+      },
+      options: { plugins:{legend:{display:false}}, scales:{x:{grid:{display:false}}, y:{grid:{color:'rgba(255,255,255,0.05)'}}}, responsive:true }
+    });
+
+    new Chart(document.getElementById('popChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Nova Gales do Sul','Vitória','Queensland','Austrália Ocidental','Austrália Meridional','Tasmânia','Território do Norte','ACT'],
+        datasets: [{
+          data: [8.3,6.8,5.4,2.9,1.8,0.57,0.25,0.46],
+          backgroundColor: 'rgba(0,196,168,0.7)',
+          borderRadius: 6
+        }]
+      },
+      options: { plugins:{legend:{display:false}}, scales:{x:{grid:{display:false}}, y:{grid:{color:'rgba(255,255,255,0.05)'}}}, responsive:true }
+    });
+
+    new Chart(document.getElementById('biodivChart'), {
+      type: 'polarArea',
+      data: {
+        labels: ['Mamíferos','Répteis','Aves','Anfíbios','Plantas Floríferas','Peixes'],
+        datasets: [{
+          data: [87,93,45,93,85,50],
+          backgroundColor: ['rgba(0,196,168,0.8)','rgba(0,212,184,0.8)','rgba(127,255,212,0.7)','rgba(0,196,168,0.6)','rgba(0,212,184,0.6)','rgba(255,255,255,0.16)'],
+          borderWidth: 0
+        }]
+      },
+      options: { plugins:{legend:{position:'bottom', labels:{color:'rgba(232,248,245,0.8)'}}}, responsive:true }
+    });
+
+    new Chart(document.getElementById('tourismChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Nova Zelândia','EUA','Reino Unido','China','Índia','Japão','Coreia do Sul','Singapura'],
+        datasets: [{
+          data: [1.48,0.96,0.81,0.74,0.41,0.37,0.31,0.27],
+          backgroundColor: 'rgba(0,196,168,0.75)',
+          borderRadius: 6
+        }]
+      },
+      options: { plugins:{legend:{display:false}}, scales:{x:{grid:{display:false}}, y:{grid:{color:'rgba(255,255,255,0.05)'}}}, responsive:true }
+    });
+  </script>
+</body>
+
+</html>

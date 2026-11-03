@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Australia | A Comprehensive Overview</title>
+  <meta name="description"
+    content="Explore Australia in-depth: geography, history, economy, GDP, HDI, education, society, biodiversity, tourism, international relations, and fun facts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg-900: #020617;
+      --bg-800: #050a24;
+      --bg-700: #06102e;
+      --bg-600: #0a143d;
+      --accent-red: #ff1f1f;
+      --accent-red-glow: #ff3333;
+      --accent-blue: #1f4bff;
+      --accent-cyan: #22d3ee;
+      --text-primary: #f8fafc;
+      --text-secondary: rgba(248, 250, 252, 0.72);
+      --text-tertiary: rgba(248, 250, 252, 0.56);
+      --border: rgba(255, 255, 255, 0.08);
+      --glass: rgba(15, 23, 42, 0.6);
+      --glow-red: 0 0 120px rgba(255, 31, 31, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    html {
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Jost', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-primary);
+      background: radial-gradient(circle at 20% 0%, rgba(255, 31, 31, 0.16) 0%, transparent 45%),
+        radial-gradient(circle at 80% 10%, rgba(31, 75, 255, 0.22) 0%, transparent 48%),
+        linear-gradient(180deg, #0b1038 0%, #050a24 40%, #020617 100%);
+      background-attachment: fixed, fixed, fixed;
+      background-size: cover, cover, cover;
+      position: relative;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      mix-blend-mode: soft-light;
+      z-index: 0;
+    }
+
+    body>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-900);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--accent-red), var(--accent-blue));
+      border-radius: 999px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: linear-gradient(90deg, rgba(2, 6, 23, 0.9) 0%, rgba(15, 27, 90, 0.8) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0.8rem 2rem;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-brand-mark {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-red-glow), var(--accent-red));
+      box-shadow: 0 0 40px rgba(255, 31, 31, 0.8);
+    }
+
+    .nav-brand-text {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      letter-spacing: 0.6rem;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      color: #ffffff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.18rem;
+      text-transform: uppercase;
+      padding: 0.6rem 0.8rem;
+      transition: color 200ms ease, text-shadow 200ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffffff;
+      text-shadow: 0 0 40px rgba(255, 31, 31, 0.6);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 0.4rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      width: 1.6rem;
+      height: 1px;
+      background: var(--text-primary);
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0.6rem;
+      padding: 0.8rem 2rem 1.2rem;
+      background: rgba(2, 6, 23, 0.98);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.24rem;
+      font-size: 0.8rem;
+    }
+
+    header {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-parallax {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .hero-layer {
+      position: absolute;
+      inset: -3% -2%;
+      background-size: cover;
+      background-position: center 50%;
+      will-change: transform;
+    }
+
+    .hero-layer--back {
+      background-image: radial-gradient(circle at 20% 10%, rgba(255, 31, 31, 0.16), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(31, 75, 255, 0.22), transparent 50%),
+        url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Petermann_Ranges_%28AU%29%2C_Uluru-Kata_Tjuta_National_Park%2C_Uluru_--_2019_--_3602-6.jpg/1920px-Petermann_Ranges_%28AU%29%2C_Uluru-Kata_Tjuta_National_Park%2C_Uluru_--_2019_--_3602-6.jpg');
+      filter: saturate(1.08);
+    }
+
+    .hero-layer--mid {
+      background: radial-gradient(circle at 50% 120%, rgba(2, 6, 23, 0.95) 0%, transparent 70%);
+    }
+
+    .hero-layer--front {
+      background: radial-gradient(circle at 50% 0%, rgba(255, 31, 31, 0.18) 0%, transparent 55%);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.25) 0%, rgba(2, 6, 23, 0.95) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      gap: 2rem;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    .hero-kicker::before {
+      content: '';
+      width: 3rem;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-red));
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 0.9;
+      letter-spacing: 0.01em;
+      font-size: clamp(4rem, 14vw, 14rem);
+      color: #ffffff;
+    }
+
+    .hero-title span {
+      display: block;
+      color: #ffffff;
+    }
+
+    .hero-title .outline {
+      color: #ffffff;
+      -webkit-text-stroke: 0;
+    }
+
+    .hero-title .solid {
+      color: #ffffff;
+      background: none;
+      -webkit-background-clip: initial;
+    }
+
+    .hero-subtitle {
+      max-width: 720px;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .hero-stat {
+      position: relative;
+      padding: 1.6rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255, 31, 31, 0.16) 0%, transparent 100%);
+      overflow: hidden;
+    }
+
+    .hero-stat::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.04), transparent 70%);
+    }
+
+    .hero-stat-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .hero-stat-value {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 700;
+    }
+
+    .hero-stat-label {
+      text-transform: uppercase;
+      letter-spacing: 0.4rem;
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+    }
+
+    main {
+      display: grid;
+      gap: 8rem;
+      padding: 6rem 0 10rem;
+    }
+
+    .section {
+      position: relative;
+    }
+
+    .section-header {
+      max-width: 1280px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    .section-kicker::before {
+      content: '';
+      width: 2.6rem;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-red));
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.6rem, 8vw, 6rem);
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: #ffffff;
+    }
+
+    .section-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.6rem;
+    }
+
+    .panel {
+      position: relative;
+      grid-column: 1 / -1;
+      border-radius: 1.2rem;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top, rgba(255, 31, 31, 0.12), transparent 70%), var(--glass);
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+    }
+
+    .panel-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 2rem;
+      padding: clamp(2rem, 6vw, 4rem);
+    }
+
+    .panel-content {
+      grid-column: 1 / 8;
+      display: grid;
+      gap: 1.6rem;
+    }
+
+    .panel-aside {
+      grid-column: 8 / -1;
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .panel-text {
+      color: var(--text-secondary);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .panel-list {
+      display: grid;
+      gap: 0.8rem;
+      list-style: none;
+    }
+
+    .panel-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .panel-list li::before {
+      content: '';
+      margin-top: 0.7rem;
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 50%;
+      background: var(--accent-red);
+      box-shadow: 0 0 40px rgba(255, 31, 31, 0.8);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .stat-card {
+      position: relative;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      padding: 1.6rem;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(31, 75, 255, 0.18) 0%, transparent 100%);
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.03), transparent 70%);
+    }
+
+    .stat-card-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .stat-card-value {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+    }
+
+    .stat-card-label {
+      text-transform: uppercase;
+      letter-spacing: 0.32rem;
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+    }
+
+    .chart-grid {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.6rem;
+    }
+
+    .chart-card {
+      position: relative;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255, 31, 31, 0.14) 0%, transparent 100%);
+      overflow: hidden;
+    }
+
+    .chart-card-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 1.6rem 2rem 0;
+    }
+
+    .chart-card-title {
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 0.4rem;
+      font-size: 0.85rem;
+      color: #ffffff;
+    }
+
+    .chart-card-body {
+      padding: 1rem 1.5rem 2rem;
+      height: 320px;
+      min-height: 260px;
+      position: relative;
+    }
+
+    @media (max-width: 720px) {
+      .chart-card-body {
+        height: 260px;
+        padding: 1rem 1rem 1.6rem;
+      }
+    }
+
+    .parallax-section {
+      position: relative;
+      min-height: 70svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .parallax-bg {
+      position: absolute;
+      inset: -4% -2%;
+      background-size: cover;
+      background-position: center 50%;
+      will-change: transform;
+    }
+
+    .parallax-overlay {
+      position: absolute;
+      inset: 0;
+      background: linearradial-gradient (circle, rgba(2, 6, 23, 0.4) 0%, rgba(2, 6, 23, 0.98) 100%);
+    }
+
+    .parallax-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      gap: 1.6rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, transparent, rgba(2, 6, 23, 0.98));
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.4rem 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 0.8rem;
+      color: #ffffff;
+    }
+
+    .footer-text {
+      color: var(--text-tertiary);
+    }
+
+    @media (max-width: 1080px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .hero-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .panel-content {
+        grid-column: 1 / -1;
+      }
+
+      .panel-aside {
+        grid-column: 1 / -1;
+      }
+
+      .stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .chart-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="#top">
+        <span class="nav-brand-mark"></span>
+        <span class="nav-brand-text">AUSTRALIA</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#geography">Geography</a></li>
+        <li><a href="#history">History</a></li>
+        <li><a href="#economy">Economy</a></li>
+        <li><a href="#hdi">HDI</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#society">Society</a></li>
+        <li><a href="#biodiversity">Biodiversity</a></li>
+        <li><a href="#tourism">Tourism</a></li>
+        <li><a href="#relations">Relations</a></li>
+        <li><a href="#facts">Curiosities</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#geography" onclick="closeMenu()">Geography</a>
+      <a href="#history" onclick="closeMenu()">History</a>
+      <a href="#economy" onclick="closeMenu()">Economy</a>
+      <a href="#hdi" onclick="closeMenu()">HDI</a>
+      <a href="#education" onclick="closeMenu()">Education</a>
+      <a href="#society" onclick="closeMenu()">Society</a>
+      <a href="#biodiversity" onclick="closeMenu()">Biodiversity</a>
+      <a href="#tourism" onclick="closeMenu()">Tourism</a>
+      <a href="#relations" onclick="closeMenu()">Relations</a>
+      <a href="#facts" onclick="closeMenu()">Curiosities</a>
+    </div>
+  </nav>
+
+  <header id="top">
+    <div class="hero-parallax">
+      <div class="hero-layer hero-layer--back" data-parallax data-speed="0.18"></div>
+      <div class="hero-layer hero-layer--mid"></div>
+      <div class="hero-layer hero-layer--front" data-parallax data-speed="0.08"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div>
+        <div class="hero-kicker">The Land Down Under</div>
+        <h1 class="hero-title">
+          <span class="outline">AUSTRALIA</span>
+          <span class="solid">THE CONTINENT</span>
+        </h1>
+        <p class="hero-subtitle">An in-depth exploration of Australia's geography, history, thriving economy, world-class
+          education, vibrant multicultural society, unmatched biodiversity, global tourism appeal, and strategic position
+          on the world stage.</p>
+      </div>
+      <div class="hero-stats">
+        <article class="hero-stat">
+          <div class="hero-stat-content">
+            <span class="hero-stat-value">7.69M</span>
+            <span class="hero-stat-label">km² Area</span>
+          </div>
+        </article>
+        <article class="hero-stat">
+          <div class="hero-stat-content">
+            <span class="hero-stat-value">26.6M</span>
+            <span class="hero-stat-label">Population</span>
+          </div>
+        </article>
+        <article class="hero-stat">
+          <div class="hero-stat-content">
+            <span class="hero-stat-value">0.946</span>
+            <span class="hero-stat-label">Human Development</span>
+          </div>
+        </article>
+        <article class="hero-stat">
+          <div class="hero-stat-content">
+            <span class="hero-stat-value">$1.72T</span>
+            <span class="hero-stat-label">GDP (Nominal)</span>
+          </div>
+        </article>
+        <article class="hero-stat">
+          <div class="hero-stat-content">
+            <span class="hero-stat-value">65,000+</span>
+            <span class="hero-stat-label">Years of Culture</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="geography">
+      <div class="section-header">
+        <div class="section-kicker">Chapter 01</div>
+        <h2 class="section-title">Geography</h2>
+      </div>
+      <div class="section-grid">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <h3 class="section-title" style="font-size: clamp(2rem, 5vw, 4rem);">A Continent of Extremes</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Aerial_View_of_Uluru_-_2013.04_-_panoramio.jpg/1280px-Aerial_View_of_Uluru_-_2013.04_-_panoramio.jpg" alt="Aerial view of Uluru and the surrounding Outback" style="width:100%; border-radius:1rem; border:1px solid var(--border); margin:0.5rem 0 1rem; object-fit:cover; height:320px;">
+              <div class="panel-text">
+                <p>Australia is the world's smallest continent and the largest island. Surrounded by the Indian, Pacific,
+                  and Southern Oceans, it spans almost 4,000 km from east to west and 3,700 km from north to south.</p>
+                <p>The landscape is defined by striking contrasts: the arid Outback covering the majority of the
+                  interior, the fertile coastal fringes, the Great Dividing Range along the east coast, tropical
+                  rainforests in the north, and alpine regions in the southeast.</p>
+              </div>
+              <ul class="panel-list">
+                <li>Great Barrier Reef: The largest living structure on Earth, stretching over 2,300 km.</li>
+                <li>Uluru-Kata Tjuta: Iconic monoliths of immense cultural and geological significance.</li>
+                <li>Mount Kosciuszko: Australia's highest mainland peak at 2,228 meters.</li>
+                <li>Murray-Darling Basin: One of the world's largest river systems.</li>
+                <li>Nullarbor Plain: A vast, treeless limestone plateau spanning South Australia and Western Australia.
+                </li>
+              </ul>
+            </div>
+            <aside class="panel-aside">
+              <div class="stat-card">
+                <div class="stat-card-content">
+                  <span class="stat-card-value">70%</span>
+                  <span class="stat-card-label">Arid or Semi-Arid</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-content">
+                  <span class="stat-card-value">25,760 km</span>
+                  <span class="stat-card-label">Coastline</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-content">
+                  <span class="stat-card-value">6 States + 2 Territories</span>
+                  <span class="stat-card-label">Political Division</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="history">
+      <div class="section-header">
+        <div class="section-kicker">Chapter 02</div>
+        <h2 class="section-title">History</h2>
+      </div>
+      <div class="section-grid">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <h3 class="section-title" style="font-size: clamp(2rem, 5vw, 4rem);">The World's Oldest Living Culture</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Ubirr_rock_art.JPG" alt="Ancient Aboriginal rock art at Ubirr" style="width:100%; border-radius:1rem; border:1px solid var(--border); margin:0.5rem 0 1rem; object-fit:cover; height:320px;">
+              <div class="panel-text">
+                <p>Aboriginal and Torres Strait Islander peoples are the First Peoples of Australia, with a continuous
+                  connection to Country spanning at least 65,000 years. Their knowledge systems, art, songlines, and
+                  languages form one of humanity's most enduring cultural heritages.</p>
+                <p>Following European exploration, the First Fleet arrived at Port Jackson in 1788, establishing the
+                  colony of New South Wales. Over the next century, the six British colonies expanded across the
+                  continent.</p>
+              </div>
+              <ul class="panel-list">
+                <li>1788 – The First Fleet arrives, founding the penal colony of New South Wales.</li>
+                <li>1850s – Australian gold rushes drive rapid population and economic growth.</li>
+                <li>January 1, 1901 – Federation: the Commonwealth of Australia is formed.</li>
+                <li>1967 – A landmark referendum: Aboriginal and Torres Strait Islander peoples are counted in the national census.</li>
+                <li>1992 – Mabo v Queensland (No. 2): native title is recognized by the High Court.</li>
+                <li>2008 – The National Apology to the Stolen Generations is delivered to Parliament.</li>
+              </ul>
+            </div>
+            <aside class="panel-aside">
+              <div class="stat-card">
+                <div class="stat-card-content">
+                  <span class="stat-card-value">65,000+ Years</span>
+                  <span class="stat-card-label">First Peoples' Continuity</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-content">
+                  <span class="stat-card-value">250+</span>
+                  <span class="stat-card-label">Language Groups</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-content">
+                  <span class="stat-card-value">1901</span>
+                  <span class="stat-card-label">Federation Date</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="economy">
+      <div class="section-header">
+        <div class="section-kicker">Chapter 03</div>
+        <h2 class="section-title">Economy & GDP</h2>
+      </div>
+      <div class="section-grid">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <h3 class="section-title" style="font-size: clamp(2rem, 5vw, 4rem);">A Resilient Mixed Economy</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Sydney_%28AU%29%2C_Skyline_--_2019_--_2287.jpg/1280px-Sydney_%28AU%29%2C_Skyline_--_2019_--_2287.jpg" alt="Sydney central business district skyline" style="width:100%; border-radius:1rem; border:1px solid var(--border); margin:0.5rem 0 1rem; object-fit:cover; height:320px;">
+              <div class="panel-text">
+                <p>Australia has a high-income, developed economy with a strong emphasis on services, resources, and
+                  agriculture. It is one of the world's most stable economies, with a AAA credit rating for most
+                  of the last three decades.</p>
+                <p>The nation is a global leader in the export of iron ore, lithium, liquefied natural gas (LNG), coal,
+                  and premium agricultural products, while its services sector accounts for the vast majority of GDP.
+                </p>
+              </div>
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">$1.72T</span>
+                    <span class="stat-card-label">Nominal GDP</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">$65,090</span>
+                    <span class="stat-card-label">GDP Per Capita</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">12th</span>
+                    <span class="stat-card-label">Global Rank</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">3.7%</span>
+                    <span class="stat-card-label">Unemployment</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="panel-aside">
+              <ul class="panel-list">
+                <li>Services: ~67–70% of GDP</li>
+                <li>Mining & Resources: ~10% of GDP</li>
+                <li>Construction: ~7% of GDP</li>
+                <li>Manufacturing: ~5% of GDP</li>
+                <li>Agriculture, Forestry & Fishing: ~2% of GDP</li>
+              </ul>
+            </aside>
+          </div>
+          <div class="chart-grid">
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">GDP Growth (2000–2024)</h4>
+              </header>
+              <div class="chart-card-body" style="position:relative; height:320px; width:100%;">
+                <canvas id="gdpGrowthChart" style="max-width:100%; height:100%;"></canvas>
+              </div>
+            </article>
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Top Export Destinations (2023)</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="exportsChart"></canvas>
+              </div>
+            </article>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="hdi">
+      <div class="section-header">
+        <div class="section-kicker">Chapter 04</div>
+        <h2 class="section-title">Human Development Index</h2>
+      </div>
+      <div class="section-grid">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <h3 class="section-title" style="font-size: clamp(2rem, 5vw, 4rem);">Very High Human Development</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Pilatus_PC-12_VH-FGT_operated_by_the_Royal_Flying_Doctor_Service_parked_at_Andamooka_Airport%2C_South_Australia.jpg/1280px-Pilatus_PC-12_VH-FGT_operated_by_the_Royal_Flying_Doctor_Service_parked_at_Andamooka_Airport%2C_South_Australia.jpg" alt="Royal Flying Doctor Service aircraft providing healthcare access" style="width:100%; border-radius:1rem; border:1px solid var(--border); margin:0.5rem 0 1rem; object-fit:cover; height:320px;">
+              <div class="panel-text">
+                <p>Australia consistently ranks among the world's top 10 nations for the Human Development Index. The HDI
+                  reflects life expectancy, education, and gross national income; it paints a picture of a high standard
+                  of living across the country.</p>
+                <p>Universal healthcare through Medicare, a robust social safety net, high levels of literacy, and strong
+                  civic institutions all contribute to Australia's long-standing performance.</p>
+              </div>
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">0.946</span>
+                    <span class="stat-card-label">HDI Score (2023)</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">7th</span>
+                    <span class="stat-card-label">Global Ranking</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">83.4</span>
+                    <span class="stat-card-label">Life Expectancy (Years)</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">$64,547</span>
+                    <span class="stat-card-label">GNI Per Capita (PPP)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="panel-aside">
+              <ul class="panel-list">
+                <li>Expected years of schooling: 21.1 years</li>
+                <li>Mean years of schooling: 12.7 years</li>
+                <li>Infant mortality rate: 3.1 per 1,000 live births</li>
+                <li>Internet access: Very high across urban and regional areas</li>
+                <li>Gender Development Index: Among the highest globally</li>
+              </ul>
+            </aside>
+          </div>
+          <div class="chart-grid">
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">HDI Comparison – Top 10 (2023)</h4>
+              </header>
+              <div class="chart-card-body" style="position:relative; height:320px; width:100%;">
+                <canvas id="hdiComparisonChart" style="max-width:100%; height:100%;"></canvas>
+              </div>
+            </article>
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Australia HDI Trend (1990–2023)</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="hdiTrendChart"></canvas>
+              </div>
+            </article>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="section-header">
+        <div class="section-kicker">Chapter 05</div>
+        <h2 class="section-title">Education & Schooling</h2>
+      </div>
+      <div class="section-grid">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <h3 class="section-title" style="font-size: clamp(2rem, 5vw, 4rem);">World-Class, Globally Sought After</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Main_Quadrangle%2C_University_of_Sydney_%28cropped%29.jpg/1280px-Main_Quadrangle%2C_University_of_Sydney_%28cropped%29.jpg" alt="Main Quadrangle at the University of Sydney" style="width:100%; border-radius:1rem; border:1px solid var(--border); margin:0.5rem 0 1rem; object-fit:cover; height:320px;">
+              <div class="panel-text">
+                <p>Australia's education system is consistently ranked among the best in the OECD. Compulsory
+                  schooling spans ages 6 to 16–17 , depending on the state, with a strong focus on literacy,
+                  numeracy, critical thinking, and STEM.</p>
+                <p>The country is the third most popular destination for international students, is home to multiple
+                  universities in the global top 50, and is renowned for research in medicine, climate science, agriculture,
+                  and renewable energy.</p>
+              </div>
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">99%</span>
+                    <span class="stat-card-label">Adult Literacy</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">42</span>
+                    <span class="stat-card-label">Universities</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">7</span>
+                    <span class="stat-card-label">In Global Top 100</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">$48B+</span>
+                    <span class="stat-card-label">Education Exports</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="panel-aside">
+              <ul class="panel-list">
+                <li>Strong performance in PISA assessments</li>
+                <li>Vocational Education and Training (VET) highly regarded</li>
+                <li>Generous investment in research and development</li>
+                <li>High rates of tertiary attainment</li>
+                <li>Indigenous education programs prioritized nationally</li>
+              </ul>
+            </aside>
+          </div>
+          <div class="chart-grid">
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Educational Attainment (Ages 25–64)</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="educationAttainmentChart"></canvas>
+              </div>
+            </article>
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Top Australian Universities (QS 2025)</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="uniRankingChart"></canvas>
+              </div>
+            </article>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="parallax-section">
+      <div class="parallax-bg" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Australia_Day_Citizenship_Ceremony_2011_%285475200349%29.jpg/1920px-Australia_Day_Citizenship_Ceremony_2011_%285475200349%29.jpg');"
+        data-parallax data-speed="0.16"></div>
+      <div class="parallax-overlay"></div>
+      <div class="parallax-content">
+        <div class="section-kicker">Coastline & Coral</div>
+        <h2 class="section-title">Where the Reef Meets the Outback</h2>
+        <p style="max-width: 720px; color: var(--text-secondary);">From the turquoise waters of the Great Barrier
+          Reef to the blood-red dunes of the Simpson Desert, Australia's natural beauty is as vast as it is varied.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="society">
+      <div class="section-header">
+        <div class="section-kicker">Chapter 06</div>
+        <h2 class="section-title">Society & Culture</h2>
+      </div>
+      <div class="section-grid">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <h3 class="section-title" style="font-size: clamp(2rem, 5vw, 4rem);">Multicultural, Modern & Proud</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Australia_Day_Citizenship_Ceremony_2011_%285475198425%29.jpg/1280px-Australia_Day_Citizenship_Ceremony_2011_%285475198425%29.jpg" alt="New citizens at an Australian citizenship ceremony" style="width:100%; border-radius:1rem; border:1px solid var(--border); margin:0.5rem 0 1rem; object-fit:cover; height:320px;">
+              <div class="panel-text">
+                <p>Australian society is defined by its diversity. Almost one-third of the population was born overseas,
+                  and over 300 languages are spoken across the country. English remains the national language; however,
+                  multilingualism is a hallmark of modern Australia.</p>
+                <p>A strong emphasis on mateship, egalitarianism, sport, and the outdoors shapes the national identity,
+                  while First Nations culture continues to be celebrated and revitalized across communities.</p>
+              </div>
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">26.6M</span>
+                    <span class="stat-card-label">Population</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">29%</span>
+                    <span class="stat-card-label">Born Overseas</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">300+</span>
+                    <span class="stat-card-label">Languages Spoken</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">86%</span>
+                    <span class="stat-card-label">Urban Population</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="panel-aside">
+              <ul class="panel-list">
+                <li>Parliamentary democracy and constitutional monarchy</li>
+                <li>Compulsory voting for federal and state elections</li>
+                <li>World-renowned in cricket, AFL, rugby, and swimming</li>
+                <li>Rich contemporary arts, music, and film scene</li>
+                <li>Strong tradition of volunteerism and community sport</li>
+              </ul>
+            </aside>
+          </div>
+          <div class="chart-grid">
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Population by State/Territory</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="populationChart"></canvas>
+              </div>
+            </article>
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Ancestry Top Responses (ABS)</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="ancestryChart"></canvas>
+              </div>
+            </article>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="biodiversity">
+      <div class="section-header">
+        <div class="section-kicker">Chapter 07</div>
+        <h2 class="section-title">Biodiversity & Wildlife</h2>
+      </div>
+      <div class="section-grid">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <h3 class="section-title" style="font-size: clamp(2rem, 5vw, 4rem);">A Living Natural Wonder</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Great_Barrier_Reef_snorkeling_11.jpg/1280px-Great_Barrier_Reef_snorkeling_11.jpg" alt="Coral and fish on the Great Barrier Reef" style="width:100%; border-radius:1rem; border:1px solid var(--border); margin:0.5rem 0 1rem; object-fit:cover; height:320px;">
+              <div class="panel-text">
+                <p>Australia is one of only 17 megadiverse nations on Earth. Because of millions of years of geographic
+                  isolation, around 80% of its mammals, reptiles, and frogs are endemic – found nowhere else on the
+                  planet.</p>
+                <p>From marsupials such as kangaroos and koalas to the ancient Daintree Rainforest and the kaleidoscope
+                  of coral in the Great Barrier Reef, Australia's wildlife is truly unique.</p>
+              </div>
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">10%</span>
+                    <span class="stat-card-label">Global Species Share</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">80%</span>
+                    <span class="stat-card-label">Endemic Mammals/Reptiles</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">1,500+</span>
+                    <span class="stat-card-label">Fish Species (Reef)</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">19</span>
+                    <span class="stat-card-label">UNESCO Natural Sites</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="panel-aside">
+              <ul class="panel-list">
+                <li>Great Barrier Reef Marine Park – World Heritage-listed since 1981</li>
+                <li>Fraser Island/K'gari – World's largest sand island</li>
+                <li>Kakadu National Park – Wetlands of global ecological importance</li>
+                <li>Tasmanian Wilderness – One of the last temperate wildernesses</li>
+                <li>Over 500 national parks protecting critical habitats</li>
+              </ul>
+            </aside>
+          </div>
+          <div class="chart-grid">
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Endemism by Group</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="endemismChart"></canvas>
+              </div>
+            </article>
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Great Barrier Reef Biodiversity</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="reefChart"></canvas>
+              </div>
+            </article>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="tourism">
+      <div class="section-header">
+        <div class="section-kicker">Chapter 08</div>
+        <h2 class="section-title">Tourism</h2>
+      </div>
+      <div class="section-grid">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <h3 class="section-title" style="font-size: clamp(2rem, 5vw, 4rem);">A World-Class Destination</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Sydney_Opera_House_and_Harbour_Bridge_Dusk_%283%29_2019-06-21.jpg/1280px-Sydney_Opera_House_and_Harbour_Bridge_Dusk_%283%29_2019-06-21.jpg" alt="Sydney Opera House and Harbour Bridge at dusk" style="width:100%; border-radius:1rem; border:1px solid var(--border); margin:0.5rem 0 1rem; object-fit:cover; height:320px;">
+              <div class="panel-text">
+                <p>Australia consistently ranks as one of the world's most desirable travel destinations. From the
+                  Sydney Opera House and the Great Barrier Reef to ancient Aboriginal rock art and rugged coastal drives,
+                  the country offers experiences found nowhere else.</p>
+                <p>Tourism plays a vital role in regional economies, supporting hundreds of thousands of jobs and
+                  showcasing Australia's natural and cultural heritage to the world.</p>
+              </div>
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">8.5M+</span>
+                    <span class="stat-card-label">International Arrivals</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">$54B</span>
+                    <span class="stat-card-label">Tourism Spend</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">20</span>
+                    <span class="stat-card-label">UNESCO World Heritage Sites</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">#9</span>
+                    <span class="stat-card-label">Global Destination Appeal</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="panel-aside">
+              <ul class="panel-list">
+                <li>Sydney Opera House – Iconic architectural masterpiece</li>
+                <li>Uluru-Kata Tjuta National Park – Sacred to the Anangu people</li>
+                <li>Great Ocean Road – One of the world's greatest drives</li>
+                <li>Daintree Rainforest – Oldest tropical rainforest on Earth</li>
+                <li>Wine regions such as Barossa, Margaret River, and Hunter Valley</li>
+              </ul>
+            </aside>
+          </div>
+          <div class="chart-grid">
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Top Source Markets (2023)</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="tourismSourceChart"></canvas>
+              </div>
+            </article>
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Visitor Spend by Category</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="tourismSpendChart"></canvas>
+              </div>
+            </article>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="relations">
+      <div class="section-header">
+        <div class="section-kicker">Chapter 09</div>
+        <h2 class="section-title">International Relations</h2>
+      </div>
+      <div class="section-grid">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <h3 class="section-title" style="font-size: clamp(2rem, 5vw, 4rem);">A Key Indo-Pacific Partner</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Parliament_House_at_dusk%2C_Canberra_ACT.jpg/1280px-Parliament_House_at_dusk%2C_Canberra_ACT.jpg" alt="Parliament House in Canberra, the center of Australian diplomacy" style="width:100%; border-radius:1rem; border:1px solid var(--border); margin:0.5rem 0 1rem; object-fit:cover; height:320px;">
+              <div class="panel-text">
+                <p>Australia is a middle power with outsized influence in the Indo-Pacific. It maintains strong
+                  alliances with the United States and the United Kingdom while deepening ties across Southeast Asia and
+                  the Pacific Islands.</p>
+                <p>A founding member of the United Nations, Australia is also a member of the G20, OECD, APEC, ANZUS,
+                  Five Eyes, and Quad, as well as a signatory to numerous free trade agreements.</p>
+              </div>
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">20+</span>
+                    <span class="stat-card-label">Free Trade Agreements</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">$777B</span>
+                    <span class="stat-card-label">Two-Way Trade (2023)</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">Quad</span>
+                    <span class="stat-card-label">Strategic Partnership</span>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-content">
+                    <span class="stat-card-value">AUKUS</span>
+                    <span class="stat-card-label">Trilateral Security Pact</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="panel-aside">
+              <ul class="panel-list">
+                <li>ANZUS Treaty – Alliance with the United States and New Zealand since 1951</li>
+                <li>Five Eyes – Intelligence partnership</li>
+                <li>AUKUS – Pillar I and II collaboration</li>
+                <li>Strong Pacific Step-up program</li>
+                <li>Active in climate diplomacy and regional stability</li>
+              </ul>
+            </aside>
+          </div>
+          <div class="chart-grid">
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Top Trading Partners (Two-Way Trade)</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="tradePartnersChart"></canvas>
+              </div>
+            </article>
+            <article class="chart-card">
+              <header class="chart-card-header">
+                <h4 class="chart-card-title">Australia's Global Engagement</h4>
+              </header>
+              <div class="chart-card-body">
+                <canvas id="engagementChart"></canvas>
+              </div>
+            </article>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="facts">
+      <div class="section-header">
+        <div class="section-kicker">Chapter 10</div>
+        <h2 class="section-title">Curiosities & Fun Facts</h2>
+      </div>
+      <div class="section-grid">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <h3 class="section-title" style="font-size: clamp(2rem, 5vw, 4rem);">Fascinating Facts About Australia</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Red_Kangaroos_at_Sturt_National_Park_NSW.jpg/1280px-Red_Kangaroos_at_Sturt_National_Park_NSW.jpg" alt="Red kangaroos in Sturt National Park" style="width:100%; border-radius:1rem; border:1px solid var(--border); margin:0.5rem 0 1rem; object-fit:cover; height:320px;">
+              <div class="panel-text">
+                <p>Beyond the headlines, Australia is full of unique records and natural oddities that make it one of
+                  the most fascinating countries on Earth.</p>
+              </div>
+              <ul class="panel-list">
+                <li>The Great Barrier Reef is visible from space and made up of over 2,900 individual reefs.</li>
+                <li>Australia has more than 10,000 beaches – you could visit a new one every day for over 27 years.
+                </li>
+                <li>Ninety percent of Australia's animals are found nowhere else in the world.</li>
+                <li>The Daintree Rainforest is estimated to be over 180 million years old.</li>
+                <li>Uluru changes color dramatically at sunrise and sunset.</li>
+                <li>Canberra was purpose-built as the national capital following a rivalry between Sydney and Melbourne.
+                </li>
+                <li>Australia produces over 95% of the world's opals.</li>
+                <li>The Tasmanian devil is the world's largest surviving carnivorous marsupial.</li>
+              </ul>
+            </div>
+            <aside class="panel-aside">
+              <div class="stat-card">
+                <div class="stat-card-content">
+                  <span class="stat-card-value">10,000+</span>
+                  <span class="stat-card-label">Beaches</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-content">
+                  <span class="stat-card-value">1,800+</span>
+                  <span class="stat-card-label">Species of Eucalyptus</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-content">
+                  <span class="stat-card-value">50+</span>
+                  <span class="stat-card-label">UNESCO-Listed Sites</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-brand">AUSTRALIA • THE LAND DOWN UNDER</span>
+      <p class="footer-text">A comprehensive educational overview covering geography, history, economy, HDI,
+        education, society, biodiversity, tourism, international relations, and curiosities.</p>
+      <p class="footer-text">Data referenced from UNDP, World Bank, ABS, DFAT, UNESCO, and QS Rankings.</p>
+      <p class="footer-text">Photos: Wikimedia Commons.</p>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    navToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+    }
+
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    let ticking = false;
+
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      parallaxElements.forEach((el) => {
+        const speed = parseFloat(el.dataset.speed || 0.1);
+        const translate = scrollY * speed;
+        el.style.transform = `translate3d(0, ${translate}px, 0)`;
+      });
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    });
+
+    updateParallax();
+
+    window.addEventListener('resize', () => {
+      Chart.instances.forEach((chart) => {
+        if (chart && typeof chart.resize === 'function') {
+          chart.resize();
+        }
+      });
+    });
+
+    Chart.defaults.color = 'rgba(248, 250, 252, 0.8)';
+    Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.08)';
+    Chart.defaults.font.family = "'Jost', sans-serif';"
+
+    const accentRed = '#ff1f1f';
+    const accentBlue = '#1f4bff';
+    const accentCyan = '#22d3ee';
+
+    new Chart(document.getElementById('gdpGrowthChart'), {
+      type: 'line',
+      data: {
+        labels: ['2000', '2005', '2010', '2015', '2020', '2024'],
+        datasets: [{
+          label: 'GDP Growth (%)',
+          data: [3.9, 3.2, 2.1, 2.3, -0.1, 1.5],
+          borderColor: accentRed,
+          backgroundColor: 'rgba(255, 31, 31, 0.18)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 4,
+          pointBackgroundColor: accentRed
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false,
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { maxTicksLimit: 6 } },
+          y: { grid: { color: 'rgba(255, 255, 255, 0.06)' }, ticks: { callback: (value) => value + '%' } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    new Chart(document.getElementById('exportsChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['China', 'Japan', 'South Korea', 'India', 'USA', 'Others'],
+        datasets: [{
+          data: [32, 16, 7, 6, 5, 34],
+          backgroundColor: [accentRed, '#ff4d4d', accentBlue, '#4f7bff', accentCyan, 'rgba(255, 255, 255, 0.24)'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '62%',
+        plugins: { legend: { position: window.innerWidth < 720 ? 'bottom' : 'right', labels: { boxWidth: 12 } } }
+      }
+    });
+
+    new Chart(document.getElementById('hdiComparisonChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Switzerland', 'Norway', 'Iceland', 'Hong Kong', 'Denmark', 'Sweden', 'Ireland', 'Germany', 'Netherlands', 'Australia'],
+        datasets: [{
+          label: 'HDI',
+          data: [0.967, 0.966, 0.959, 0.956, 0.952, 0.952, 0.950, 0.950, 0.946, 0.946],
+          backgroundColor: (context) => context.dataIndex === 9 ? accentRed : 'rgba(31, 75, 255, 0.8)',
+          borderRadius: 8
+        }]
+      },
+      options: {
+        indexAxis: window.innerWidth < 720 ? 'x' : 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { grid: { color: 'rgba(255, 255, 255, 0.06)' }, ticks: { maxTicksLimit: 6 } },
+          y: { grid: { display: false }, ticks: { font: { size: window.innerWidth < 720 ? 9 : 11 } } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    new Chart(document.getElementById('hdiTrendChart'), {
+      type: 'line',
+      data: {
+        labels: ['1990', '1995', '2000', '2005', '2010', '20115', '20120', '2023'],
+        datasets: [{
+          label: 'HDI',
+          data: [0.866, 0.882, 0.898, 0.913, 0.927, 0.932, 0.939, 0.946],
+          borderColor: accentCyan,
+          backgroundColor: 'rgba(34, 211, 238, 0.16)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(255, 255, 255, 0.06)' }, min: 0.8, max: 0.98 }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    new Chart(document.getElementById('educationAttainmentChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Below Upper Secondary', 'Upper Secondary', 'Post-Secondary Non-Tertiary', 'Tertiary'],
+        datasets: [{
+          label: '% of Population',
+          data: [21, 35, 5, 39],
+          backgroundColor: [ 'rgba(255, 255, 255, 0.18)', accentBlue, accentCyan, accentRed ],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(255, 255, 255, 0.06)' }, ticks: { callback: (value) => value + '%' } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    new Chart(document.getElementById('uniRankingChart'), {
+      type: 'bar',
+      data: {
+        labels: ['University of Melbourne', 'University of Sydney', 'UNSW Sydney', 'Australian National University', 'Monash University', 'University of Queensland', 'University of Western Australia'],
+        datasets: [{
+          label: 'QS Rank',
+          data: [13, 18, 19, 34, 37, 43, 77],
+          backgroundColor: accentRed,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { reverse: true, grid: { color: 'rgba(255, 255, 255, 0.06)' } },
+          y: { grid: { display: false } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    new Chart(document.getElementById('populationChart'), {
+      type: 'bar',
+      data: {
+        labels: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'NT', 'ACT'],
+        datasets: [{
+          label: 'Population (Millions)',
+          data: [8.27, 6.81, 5.47, 2.97, 1.84, 0.57, 0.25, 0.46],
+          backgroundColor: accentBlue,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(255, 255, 255, 0.06)' } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    new Chart(document.getElementById('ancestryChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['English', 'Australian', 'Irish', 'Scottish', 'Chinese', 'Italian', 'German', 'Others'],
+        datasets: [{
+          data: [33, 29, 9.5, 8.3, 5.6, 4.4, 4.0, 6.2],
+          backgroundColor: [accentRed, '#ff4d4d', accentBlue, '#4f7bff', accentCyan, '#67e8f9', 'rgba(31, 75, 255, 0.5)', 'rgba(255, 255, 255, 0.24)'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '58%',
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+
+    new Chart(document.getElementById('endemismChart'), {
+      type: 'polarArea',
+      data: {
+        labels: ['Mammals', 'Reptiles', 'Amphibians', 'Birds', 'Vascular Plants', 'Freshwater Fish'],
+        datasets: [{
+          data: [87, 93, 93, 45, 85, 29],
+          backgroundColor: [accentRed, '#ff4d4d', accentBlue, '#4f7bff', accentCyan, 'rgba(34, 211, 238, 0.4)'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } },
+        scales: { r: { ticks: { display: false }, grid: { color: 'rgba(255, 255, 255, 0.06)' } } }
+      }
+    });
+
+    new Chart(document.getElementById('reefChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Corals', 'Fish Species', 'Molluscs', 'Crustaceans', 'Birds', 'Marine Mammals', 'Reptiles'],
+        datasets: [{
+          label: 'Species Count',
+          data: [400, 1500, 4000, 1300, 240, 30, 6],
+          backgroundColor: accentCyan,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(255, 255, 255, 0.06)' } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    new Chart(document.getElementById('tourismSourceChart'), {
+      type: 'bar',
+      data: {
+        labels: ['New Zealand', 'USA', 'UK', 'China', 'India', 'Japan', 'Singapore', 'South Korea'],
+        datasets: [{
+          label: 'Arrivals (Millions)',
+          data: [1.24, 0.72, 0.66, 0.69, 0.40, 0.28, 0.34, 0.24],
+          backgroundColor: accentRed,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(255, 255, 255, 0.06)' } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    new Chart(document.getElementById('tourismSpendChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Accommodation', 'Food & Drink', 'Transport', 'Shopping & Gifts', 'Activities & Tours', 'Other'],
+        datasets: [{
+          data: [35, 20, 18, 12, 8, 7],
+          backgroundColor: [accentRed, '#ff4d4d', accentBlue, '#4f7bff', accentCyan, 'rgba(255, 255, 255, 0.24)'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '58%',
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+
+    new Chart(document.getElementById('tradePartnersChart'), {
+      type: 'bar',
+      data: {
+        labels: ['China', 'Japan', 'USA', 'South Korea', 'India', 'Singapore', 'UK', 'New Zealand'],
+        datasets: [{
+          label: 'Two-Way Trade (USD Billion)',
+          data: [285, 80, 76, 55, 50, 46, 31, 26],
+          backgroundColor: accentBlue,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(255, 255, 255, 0.06)' } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    new Chart(document.getElementById('engagementChart'), {
+      type: 'radar',
+      data: {
+        labels: ['Trade', 'Security', 'Climate', 'Development', 'Education', 'Tourism'],
+        datasets: [{
+          label: 'Engagement Intensity',
+          data: [95, 90, 78, 72, 88, 84],
+          borderColor: accentRed,
+          backgroundColor: 'rgba(255, 31, 31, 0.24)',
+          pointBackgroundColor: accentRed
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            angleLines: { color: 'rgba(255, 255, 255, 0.08)' },
+            grid: { color: 'rgba(255, 255, 255, 0.08)' },
+            pointLabels: { color: 'rgba(248, 250, 252, 0.8)' },
+            ticks: { display: false, backdropColor: transparent }
+          }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+  </script>
+</body>
+
+</html>
