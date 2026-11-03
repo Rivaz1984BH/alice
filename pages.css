@@ -178,6 +178,7 @@ nav {
   width:100%; height:100%; object-fit:cover; object-position:center 50%; display:block;
   transition:transform .5s ease;
 }
+.gc-img.tall { height:auto; aspect-ratio:4/3; }
 .gc:hover .gc-img img { transform:scale(1.012); }
 
 .card-img {
@@ -188,15 +189,18 @@ nav {
   width:100%; height:100%; object-fit:cover; object-position:center 50%; display:block;
   transition:transform .5s ease;
 }
-.card-img.portrait img { object-position:center center; }
+.card-img.portrait, .card-img.whole { height:auto; aspect-ratio:1/1; }
+.card-img.portrait img { object-position:center 5%; }
+.card-img.whole { background:#04070f; }
+.card-img.whole img { object-fit:contain; object-position:center; }
 .icon-card:hover .card-img img { transform:scale(1.015); }
 
 .spotlight-photo {
-  border-radius:16px; overflow:hidden; height:250px;
+  border-radius:16px; overflow:hidden; aspect-ratio:8/5;
   border:1px solid rgba(224,245,255,.14);
 }
 .spotlight-photo img {
-  width:100%; height:100%; object-fit:cover; object-position:center center;
+  width:100%; height:100%; object-fit:cover; object-position:center 8%;
   display:block; transition:transform .5s ease;
 }
 .spotlight-photo:hover img { transform:scale(1.01); }
